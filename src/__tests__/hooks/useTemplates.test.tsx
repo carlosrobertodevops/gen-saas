@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useTemplatesArray } from '@/app/LocalData/templates';
+import { useTemplatesArray } from '@/features/data/templates';
 
 // Mock do next-intl
 jest.mock('next-intl', () => ({

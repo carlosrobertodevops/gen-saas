@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import LanguageMenu from '@/app/components/LanguageMenu';
+import LanguageMenu from '@/components/LanguageMenu';
 import { useRouter, usePathname } from 'next/navigation';
 
 // Mock das dependências de navegação
