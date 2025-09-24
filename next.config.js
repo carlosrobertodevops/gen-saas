@@ -1,9 +1,5 @@
-const withNextIntl = require('next-intl/plugin')();
+const createNextIntlPlugin = require('next-intl/plugin');
 
-module.exports = withNextIntl({
+module.exports = createNextIntlPlugin()({
   reactStrictMode: true,
-  i18n: {
-    locales: ['en-US', 'pt-BR'],
-    defaultLocale: 'en-US'
-  }
 });
