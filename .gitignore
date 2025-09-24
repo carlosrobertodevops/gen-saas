@@ -41,3 +41,4 @@ next-env.d.ts
 
 
 github-mcp.json
+/src/generated/prisma

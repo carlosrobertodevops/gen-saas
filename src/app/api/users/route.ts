@@ -1,69 +1,67 @@
 // pages/api/users.ts
-import { NextApiRequest, NextApiResponse } from "next";
-import connect from "@/app/lib/connect";
-import User from "@/app/models/UserSchema";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
-  const { id, email } = await req.json(); // Adjust fields based on your model
+  const { id, email } = await req.json();
 
   // Simple validation
   if (!email || !id) {
-    return NextResponse.json({ error: "All fields are required" });
+    return NextResponse.json({ error: "All fields are required" }, { status: 400 });
   }
 
   try {
-    await connect();
-    const newUser = {
-      clerkUserId: id,
-      emailAddress: email,
-      isPro: false,
-      accumulatedWords: 0,
-    };
-    await User.create(newUser);
+    const newUser = await prisma.user.create({
+      data: {
+        clerkUserId: id,
+        emailAddress: email,
+        isPro: false,
+        accumulatedWords: 0
+      }
+    });
 
     return NextResponse.json({
       message: "User added successfully",
-    });
+      user: newUser
+    }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to add user", details: error });
+    console.error("Failed to add user:", error);
+    return NextResponse.json({ 
+      error: "Failed to add user", 
+      details: error instanceof Error ? error.message : String(error) 
+    }, { status: 500 });
   }
 }
 
 // GET Method: Retrieve user properties (isPro, accumulatedWords) based on user id
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const userId = searchParams.get("userId");
+  const clerkUserId = searchParams.get('clerkUserId');
 
-  // Validate if userId is provided
-  if (!userId) {
+  if (!clerkUserId) {
     return NextResponse.json({ error: "User ID is required" }, { status: 400 });
   }
 
   try {
-    await connect();
-    const user = await User.findOne({ clerkUserId: userId }).select(
-      "isPro accumulatedWords"
-    );
+    const user = await prisma.user.findUnique({
+      where: { clerkUserId },
+      select: {
+        isPro: true,
+        accumulatedWords: true
+      }
+    });
 
-    // If user not found
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Return the user's isPro and accumulatedWords fields
-    return NextResponse.json(
-      {
-        isPro: user.isPro,
-        accumulatedWords: user.accumulatedWords,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json(user);
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch user data", details: error },
-      { status: 500 }
-    );
+    console.error("Failed to retrieve user:", error);
+    return NextResponse.json({ 
+      error: "Failed to retrieve user", 
+      details: error instanceof Error ? error.message : String(error) 
+    }, { status: 500 });
   }
 }
 
@@ -78,26 +76,19 @@ export async function PUT(req: Request) {
   console.log("accumulated words", accumulatedWords);
 
   try {
-    await connect();
-    // Find the user by ID and update the fields
-    const updatedUser = await User.findOneAndUpdate(
-      { clerkUserId: id },
-      { isPro: isPro, accumulatedWords: accumulatedWords },
-      { new: true } // Return the updated document
-    );
-
-    if (!updatedUser) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
+    await prisma.user.update({
+      where: { clerkUserId: id },
+      data: { isPro: isPro, accumulatedWords: accumulatedWords },
+    });
 
     return NextResponse.json({
       message: "User updated successfully",
-      updatedUser,
     });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to update user", details: error },
-      { status: 500 }
-    );
+    console.error("Failed to update user:", error);
+    return NextResponse.json({ 
+      error: "Failed to update user", 
+      details: error instanceof Error ? error.message : String(error) 
+    }, { status: 500 });
   }
 }
