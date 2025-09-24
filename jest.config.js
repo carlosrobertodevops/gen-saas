@@ -20,10 +20,15 @@ const customJestConfig = {
   moduleNameMapper: {
     // Mapeamento de módulos para resolução de imports
     '^@/(.*)$': '<rootDir>/src/$1',
+    // Configuração para next-intl
+    '^next-intl/(.*)$': 'next-intl/dist/$1',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!next-intl)/',
+  ],
 };
 
 module.exports = createJestConfig(customJestConfig);

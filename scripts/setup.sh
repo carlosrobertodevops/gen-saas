@@ -21,7 +21,30 @@ fi
 echo "Instalando dependências..."
 npm install
 
-# Configurar ambiente de desenvolvimento
+# Instalar dependências de desenvolvimento adicionais
+echo "Instalando dependências de desenvolvimento..."
+npm install -D @testing-library/jest-dom
+
+# Configurar next-intl para App Router
+echo "Configurando next-intl..."
+mkdir -p src/i18n
+cat > src/i18n/request.ts << EOL
+import {createSharedPathnamesNavigation} from 'next-intl/navigation';
+
+export const locales = ['en-US', 'pt-BR'] as const;
+export const {Link, redirect, usePathname, useRouter} = createSharedPathnamesNavigation({locales});
+EOL
+
+# Atualizar next.config.js para remover i18n e usar next-intl
+cat > next.config.js << EOL
+const createNextIntlPlugin = require('next-intl/plugin');
+
+module.exports = createNextIntlPlugin()({
+  reactStrictMode: true,
+});
+EOL
+
+# Configurar arquivo de ambiente
 echo "Copiando arquivo de ambiente..."
 cp .env.example .env
 
@@ -29,12 +52,9 @@ cp .env.example .env
 echo "Gerando cliente Prisma..."
 npx prisma generate
 
-# Executar migrações de banco de dados
-echo "Executando migrações de banco de dados..."
-npx prisma migrate dev
-
-# Instalar husky hooks
+# Configurar Husky (se necessário)
 echo "Configurando Git hooks..."
+npm pkg set scripts.prepare="husky install"
 npm run prepare
 
 # Executar testes
