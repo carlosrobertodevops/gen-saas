@@ -20,33 +20,20 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/features/*": [
-        "src/features/*"
-      ],
-      "@/hooks/*": [
-        "src/hooks/*"
-      ],
-      "@/lib/*": [
-        "src/lib/*"
-      ],
-      "@/services/*": [
-        "src/services/*"
-      ],
-      "@/config/*": [
-        "src/config/*"
-      ],
-      "@/styles/*": [
-        "src/styles/*"
-      ],
-      "@/types/*": [
-        "src/@types/*"
-      ],
-      "@/middleware/*": [
-        "src/middleware/*"
-      ]
+      "@/components/*": ["src/components/*"],
+      "@/components/SideBar/*": ["src/components/SideBar/*"],
+      "@/components/Components/*": ["src/components/Components/*"],
+      "@/components/DropDowns/*": ["src/components/DropDowns/*"],
+      "@/components/Windows/*": ["src/components/Windows/*"],
+      "@/components/OtherComponents/*": ["src/components/OtherComponents/*"],
+      "@/features/*": ["src/features/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/services/*": ["src/services/*"],
+      "@/config/*": ["src/config/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/types/*": ["src/@types/*"],
+      "@/middleware/*": ["src/middleware/*"]
     },
     "plugins": [
       {
