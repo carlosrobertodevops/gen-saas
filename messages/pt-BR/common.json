@@ -1,0 +1,66 @@
+{
+  "Navigation": {
+    "home": "Início",
+    "dashboard": "Painel",
+    "templates": "Modelos",
+    "projects": "Projetos",
+    "settings": "Configurações",
+    "language": "Idioma"
+  },
+  "Buttons": {
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "create": "Criar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "getStartedFree": "Comece de Graça",
+    "getStarted": "Começar"
+  },
+  "Common": {
+    "search": "Buscar",
+    "loading": "Carregando...",
+    "noResults": "Nenhum resultado encontrado"
+  },
+  "Templates": {
+    "postTitle": "Título de Post",
+    "blogTags": "Tags de Blog",
+    "youtubeHashtags": "Hashtags do YouTube",
+    "codeGenerator": "Gerador de Código",
+    "emailNewsletter": "Newsletter por E-mail",
+    "questionAnswer": "Perguntas e Respostas",
+    "textSummarizer": "Resumidor de Texto",
+    "contentRewriter": "Reescritor de Conteúdo",
+    "productDescription": "Descrição de Produto",
+    "facebookAds": "Anúncios do Facebook",
+    "blogSection": "Seção de Blog",
+    "seoMetaDescription": "Meta Descrição SEO",
+    "linkedinBio": "Bio do LinkedIn",
+    "instagramCaptions": "Legendas do Instagram"
+  },
+  "Pricing": {
+    "title": "Planos de Preço",
+    "subtitle": "Escolha o plano que melhor se adapta a você. Desfrute de uma experiência perfeita!",
+    "freePlan": {
+      "title": "Plano Gratuito",
+      "price": "R$ 0",
+      "features": [
+        "Acesso a 5 Modelos",
+        "Gere até 1.000 palavras por mês",
+        "Suporte ao Cliente Básico",
+        "Tom de Conteúdo Padrão",
+        "Rastreamento Limitado de Contagem de Palavras"
+      ]
+    },
+    "proPlan": {
+      "title": "Plano Pro",
+      "price": "R$ 9,99",
+      "features": [
+        "Acesso Ilimitado a Todos os 14 Modelos",
+        "Gere até 100.000 palavras por mês",
+        "Suporte ao Cliente Prioritário",
+        "Tom de Conteúdo Personalizado",
+        "Suporte Prioritário ao Cliente"
+      ]
+    }
+  }
+}

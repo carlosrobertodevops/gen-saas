@@ -10,6 +10,7 @@ import { Search, Tag, ClipboardList } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { FaCog, FaChartBar, FaLock } from "react-icons/fa";
 import { IoCheckmarkCircle, IoClose } from "react-icons/io5";
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
   return (
@@ -176,42 +177,30 @@ function KeyFeatures() {
 }
 
 function PricingSection() {
+  const t = useTranslations('Pricing');
+
   return (
-    <div className="mx-8  text-center p-8 py-14">
-      <h2 className="text-2xl font-bold mb-6">Pricing Plans</h2>
+    <div className="mx-8 text-center p-8 py-14">
+      <h2 className="text-2xl font-bold mb-6">{t('title')}</h2>
       <p className="text-slate-500 mb-8">
-        Choose the plan that suits you best. Enjoy a seamless note-taking
-        experience!
+        {t('subtitle')}
       </p>
-      <div className=" flex justify-center w-full max-sm:flex-col  gap-10 mt-12">
+      <div className="flex justify-center w-full max-sm:flex-col gap-10 mt-12">
         {/* Free Plan */}
         <PlanCard
-          title="Free Plan"
-          price="$0"
-          features={[
-            "Access to 5 Templates",
-            "Generate up to 1,000 words per month",
-            "Basic Customer Support",
-            "Standard Content Tone",
-            "Limited Word Count Tracking",
-          ]}
-          buttonLabel="Get Started for Free"
+          title={t('freePlan.title')}
+          price={t('freePlan.price')}
+          features={t('freePlan.features')}
+          buttonLabel={t('Buttons.getStartedFree')}
           isPro={false}
         />
         <PlanCard
-          title="Pro Plan"
-          price="$9,99"
-          features={[
-            "Unlimited Access to All 14 Templates",
-            "Generate up to 100,000 words per month.",
-            "Priority Customer Support",
-            "Custom Content Tone",
-            "Priority Customer Support",
-          ]}
-          buttonLabel="Get Started"
+          title={t('proPlan.title')}
+          price={t('proPlan.price')}
+          features={t('proPlan.features')}
+          buttonLabel={t('Buttons.getStarted')}
           isPro={true}
         />
-        {/* Pro Plan */}
       </div>
     </div>
   );
